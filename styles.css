@@ -2,18 +2,20 @@
 :root {
     --primary-color: #00ff41;
     --secondary-color: #0a0e27;
-    --accent-color: #ff0055;
+    --accent-color: #00d9ff;
     --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
+    --text-secondary: #b0b0b0;
     --bg-dark: #0a0e27;
     --bg-darker: #050810;
     --bg-card: #1a1f3a;
     --border-color: #2a2f4a;
-    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-1: linear-gradient(135deg, #00ff41 0%, #00d9ff 100%);
+    --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 60px rgba(0, 255, 65, 0.15);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ===== Reset & Base Styles ===== */
@@ -31,8 +33,10 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -182,8 +186,9 @@ body {
     text-transform: uppercase;
     position: relative;
     color: var(--primary-color);
-    letter-spacing: 3px;
-    animation: glitch 3s infinite;
+    letter-spacing: 2px;
+    animation: glitch 5s infinite;
+    text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
 }
 
 @keyframes glitch {
@@ -439,9 +444,10 @@ section {
 }
 
 .pipeline-step:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--primary-color);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(26, 31, 58, 0.9) 100%);
 }
 
 .step-number {
@@ -843,9 +849,9 @@ section {
 }
 
 .cert-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--primary-color);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-lg);
 }
 
 .cert-badge {
