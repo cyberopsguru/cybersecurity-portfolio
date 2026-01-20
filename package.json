@@ -1,0 +1,21 @@
+{
+  "name": "cybersecurity-portfolio",
+  "version": "1.0.0",
+  "description": "Professional cybersecurity portfolio website for MAANG applications",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "deploy:netlify": "netlify deploy --prod",
+    "deploy:vercel": "vercel --prod"
+  },
+  "keywords": [
+    "cybersecurity",
+    "portfolio",
+    "security-engineer",
+    "appsec",
+    "penetration-testing",
+    "maang"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
