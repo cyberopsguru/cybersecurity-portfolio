@@ -85,7 +85,7 @@
             <!-- Architecture Diagram -->
             <div class="architecture-diagram">
                 <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 2rem;">System Architecture</h2>
-                <svg class="diagram-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                <svg class="diagram-svg" viewBox="0 0 1400 600" xmlns="http://www.w3.org/2000/svg">
                     <!-- Scanning Tools (Upstream) -->
                     <rect x="50" y="50" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
                     <text x="110" y="75" text-anchor="middle" fill="#888" font-size="11">Qualys</text>
@@ -132,46 +132,46 @@
                     <text x="445" y="235" text-anchor="middle" fill="#00ff41" font-size="11" font-weight="bold">STARTS HERE</text>
 
                     <!-- Enrichment Layer -->
-                    <rect x="550" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
-                    <text x="640" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">Enrichment</text>
-                    <text x="640" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">LLM + CMDB</text>
-                    <text x="640" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Asset Attribution</text>
-                    <text x="640" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• False Positive Filter</text>
+                    <rect x="730" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
+                    <text x="820" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">Enrichment</text>
+                    <text x="820" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">LLM + CMDB</text>
+                    <text x="820" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Asset Attribution</text>
+                    <text x="820" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• False Positive Filter</text>
 
-                    <!-- Arrow from Ingestion to Enrichment -->
-                    <line x1="480" y1="210" x2="550" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Arrow from API Consumer to Enrichment -->
+                    <line x1="660" y1="210" x2="730" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
 
                     <!-- Ticketing System -->
-                    <rect x="800" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
-                    <text x="890" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">Ticketing</text>
-                    <text x="890" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">ServiceNow/Jira</text>
-                    <text x="890" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Auto-Create Tickets</text>
-                    <text x="890" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• Owner Routing</text>
+                    <rect x="980" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
+                    <text x="1070" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">Ticketing</text>
+                    <text x="1070" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">ServiceNow/Jira</text>
+                    <text x="1070" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Auto-Create Tickets</text>
+                    <text x="1070" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• Owner Routing</text>
 
                     <!-- Arrow from Enrichment to Ticketing -->
-                    <line x1="730" y1="210" x2="800" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <line x1="910" y1="210" x2="980" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
 
                     <!-- SLA Monitoring -->
-                    <rect x="550" y="350" width="180" height="100" fill="#1a1f3a" stroke="#ff0055" stroke-width="2" rx="8"/>
-                    <text x="640" y="385" text-anchor="middle" fill="#ff0055" font-size="16" font-weight="bold">SLA Monitoring</text>
-                    <text x="640" y="410" text-anchor="middle" fill="#b0b0b0" font-size="11">• Deadline Tracking</text>
-                    <text x="640" y="428" text-anchor="middle" fill="#b0b0b0" font-size="11">• Escalation Rules</text>
+                    <rect x="730" y="350" width="180" height="100" fill="#1a1f3a" stroke="#ff0055" stroke-width="2" rx="8"/>
+                    <text x="820" y="385" text-anchor="middle" fill="#ff0055" font-size="16" font-weight="bold">SLA Monitoring</text>
+                    <text x="820" y="410" text-anchor="middle" fill="#b0b0b0" font-size="11">• Deadline Tracking</text>
+                    <text x="820" y="428" text-anchor="middle" fill="#b0b0b0" font-size="11">• Escalation Rules</text>
 
                     <!-- Reporting Dashboard -->
-                    <rect x="800" y="350" width="180" height="100" fill="#1a1f3a" stroke="#ff0055" stroke-width="2" rx="8"/>
-                    <text x="890" y="385" text-anchor="middle" fill="#ff0055" font-size="16" font-weight="bold">Tableau Dashboard</text>
-                    <text x="890" y="410" text-anchor="middle" fill="#b0b0b0" font-size="11">• Executive Metrics</text>
-                    <text x="890" y="428" text-anchor="middle" fill="#b0b0b0" font-size="11">• Trend Analysis</text>
+                    <rect x="980" y="350" width="180" height="100" fill="#1a1f3a" stroke="#ff0055" stroke-width="2" rx="8"/>
+                    <text x="1070" y="385" text-anchor="middle" fill="#ff0055" font-size="16" font-weight="bold">Tableau Dashboard</text>
+                    <text x="1070" y="410" text-anchor="middle" fill="#b0b0b0" font-size="11">• Executive Metrics</text>
+                    <text x="1070" y="428" text-anchor="middle" fill="#b0b0b0" font-size="11">• Trend Analysis</text>
 
                     <!-- Verification -->
-                    <rect x="1000" y="250" width="150" height="80" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
-                    <text x="1075" y="285" text-anchor="middle" fill="#00ff41" font-size="14" font-weight="bold">Verification</text>
-                    <text x="1075" y="305" text-anchor="middle" fill="#b0b0b0" font-size="12">Rescan & Close</text>
+                    <rect x="1230" y="180" width="150" height="80" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
+                    <text x="1305" y="215" text-anchor="middle" fill="#00ff41" font-size="14" font-weight="bold">Verification</text>
+                    <text x="1305" y="235" text-anchor="middle" fill="#b0b0b0" font-size="12">Rescan & Close</text>
 
                     <!-- Arrows -->
-                    <line x1="890" y1="270" x2="890" y2="350" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <line x1="890" y1="270" x2="1000" y2="290" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <line x="640" y1="270" x2="640" y2="350" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <line x1="1070" y1="270" x2="1070" y2="350" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <line x1="1160" y1="210" x2="1230" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <line x1="820" y1="270" x2="820" y2="350" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
 
                     <!-- Arrow marker -->
                     <defs>
