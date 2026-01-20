@@ -86,30 +86,22 @@
             <div class="architecture-diagram">
                 <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 2rem;">System Architecture</h2>
                 <svg class="diagram-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Scanner APIs -->
-                    <rect x="50" y="50" width="150" height="80" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
-                    <text x="125" y="85" text-anchor="middle" fill="#00ff41" font-size="14" font-weight="bold">Qualys API</text>
-                    <text x="125" y="105" text-anchor="middle" fill="#b0b0b0" font-size="12">Scanner Data</text>
+                    <!-- Centralized Vulnerability Database -->
+                    <rect x="50" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
+                    <text x="140" y="185" text-anchor="middle" fill="#00ff41" font-size="16" font-weight="bold">Vuln Database</text>
+                    <text x="140" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">(Centralized)</text>
+                    <text x="140" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">Qualys + Nessus</text>
+                    <text x="140" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">+ Rapid7 + Tenable</text>
 
-                    <rect x="50" y="150" width="150" height="80" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
-                    <text x="125" y="185" text-anchor="middle" fill="#00ff41" font-size="14" font-weight="bold">Nessus API</text>
-                    <text x="125" y="205" text-anchor="middle" fill="#b0b0b0" font-size="12">Scan Results</text>
-
-                    <rect x="50" y="250" width="150" height="80" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
-                    <text x="125" y="285" text-anchor="middle" fill="#00ff41" font-size="14" font-weight="bold">Rapid7 API</text>
-                    <text x="125" y="305" text-anchor="middle" fill="#b0b0b0" font-size="12">Vulnerability Feed</text>
-
-                    <!-- Ingestion Layer -->
+                    <!-- API Consumption Layer -->
                     <rect x="300" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
-                    <text x="390" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">Ingestion Layer</text>
+                    <text x="390" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">API Consumer</text>
                     <text x="390" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">Python Scripts</text>
-                    <text x="390" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• API Polling</text>
-                    <text x="390" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• JSON/XML Parsing</text>
+                    <text x="390" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Query DB API</text>
+                    <text x="390" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• Parse & Normalize</text>
 
-                    <!-- Arrows from Scanners to Ingestion -->
-                    <line x1="200" y1="90" x2="300" y2="200" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <line x1="200" y1="190" x2="300" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <line x1="200" y1="290" x2="300" y2="220" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Arrow from DB to API Consumer -->
+                    <line x1="230" y1="210" x2="300" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
 
                     <!-- Enrichment Layer -->
                     <rect x="550" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
@@ -184,7 +176,8 @@
                 <div class="code-block">
                     <code>
 <strong>Languages:</strong> Python 3.9+, Bash<br>
-<strong>APIs:</strong> Qualys VMDR, Nessus, Rapid7 InsightVM, Tenable.io<br>
+<strong>Data Source:</strong> Centralized Vulnerability Database API<br>
+<strong>Scanner Data:</strong> Qualys, Nessus, Rapid7, Tenable (aggregated in DB)<br>
 <strong>Ticketing:</strong> ServiceNow REST API, Jira API<br>
 <strong>Data:</strong> PostgreSQL, Redis (caching)<br>
 <strong>CMDB:</strong> ServiceNow CMDB, AWS Config, Azure Resource Graph<br>
