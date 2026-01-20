@@ -373,6 +373,117 @@ section {
     line-height: 1.8;
 }
 
+.target-roles {
+    background: var(--bg-card);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.target-roles p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.scale-indicator {
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.scale-indicator strong {
+    color: var(--primary-color);
+}
+
+/* ===== Workflow/Pipeline Section ===== */
+.workflow {
+    background: var(--bg-dark);
+}
+
+.pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pipeline-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    min-width: 180px;
+    max-width: 200px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.pipeline-step:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.step-content h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-content h3 i {
+    font-size: 1.3rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.step-detail {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.pipeline-arrow {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -1041,6 +1152,19 @@ section {
 
     .linkedin-cta-content > i {
         font-size: 3rem;
+    }
+
+    .pipeline {
+        flex-direction: column;
+    }
+
+    .pipeline-arrow {
+        transform: rotate(90deg);
+    }
+
+    .pipeline-step {
+        max-width: 100%;
+        width: 100%;
     }
 }
 

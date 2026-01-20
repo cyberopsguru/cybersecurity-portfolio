@@ -71,8 +71,12 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
+                    <div class="target-roles">
+                        <p><strong>Target Roles:</strong> Security Operations Engineer | Vulnerability Management Engineer | Security Automation (VulnOps) | Cloud Security Operations</p>
+                    </div>
                     <p class="lead">Cybersecurity Engineer with 4+ years of experience in Security Operations (SecOps), specializing in vulnerability management, incident response support, threat intelligence, PCI-DSS compliance, and network security operations.</p>
                     <p>Experienced in monitoring and triaging security events, analyzing threat intelligence feeds, correlating IOCs, and responding to critical and zero-day vulnerabilities. Proven ability to drive remediation across engineering and infrastructure teams, automate SecOps workflows using Python and Bash, and enhance detection and response efficiency while maintaining a resilient enterprise security posture.</p>
+                    <p class="scale-indicator"><strong>Scale:</strong> Managing high-throughput scanner telemetry across large distributed fleets spanning multi-cloud environments (AWS, Azure, GCP), containerized workloads (Kubernetes), and on-premise infrastructure. Coordinating remediation efforts across hundreds of owning teams while maintaining strict SLA compliance.</p>
                     <div class="stats">
                         <div class="stat-item">
                             <h3>4+</h3>
@@ -88,6 +92,68 @@
         </div>
     </section>
 
+    <!-- How I Work Section -->
+    <section id="workflow" class="workflow">
+        <div class="container">
+            <h2 class="section-title">How I Work</h2>
+            <p class="section-subtitle">My Vulnerability Management Pipeline</p>
+            <div class="pipeline">
+                <div class="pipeline-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-download"></i> Intake</h3>
+                        <p>Consume vulnerability data via APIs from Qualys, Nessus, Rapid7, and Tenable</p>
+                        <span class="step-detail">Parse JSON/XML, normalize data formats</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-filter"></i> Triage</h3>
+                        <p>Prioritize based on CVSS score, asset criticality, and exploitability</p>
+                        <span class="step-detail">Risk scoring, false positive filtering</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-route"></i> Routing</h3>
+                        <p>Auto-assign to owning teams via CMDB/asset inventory mapping</p>
+                        <span class="step-detail">ServiceNow/Jira ticket creation</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-tasks"></i> Execution</h3>
+                        <p>Track remediation progress with SLA monitoring and escalation</p>
+                        <span class="step-detail">Automated reminders, executive escalation</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-check-circle"></i> Verification</h3>
+                        <p>Validate remediation through rescans and ticket closure</p>
+                        <span class="step-detail">Automated verification, backlog aging</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-chart-line"></i> Reporting</h3>
+                        <p>Generate Tableau dashboards for leadership visibility</p>
+                        <span class="step-detail">KPIs, trends, compliance metrics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills" class="skills">
