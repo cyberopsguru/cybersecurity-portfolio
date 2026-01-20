@@ -201,7 +201,19 @@ body {
 .hero-subtitle {
     font-size: 1.3rem;
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero-oneliner {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+    background: rgba(0, 255, 65, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
 }
 
 .hero-tags {
