@@ -86,22 +86,50 @@
             <div class="architecture-diagram">
                 <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 2rem;">System Architecture</h2>
                 <svg class="diagram-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Scanning Tools (Upstream) -->
+                    <rect x="50" y="50" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
+                    <text x="110" y="75" text-anchor="middle" fill="#888" font-size="11">Qualys</text>
+                    <text x="110" y="92" text-anchor="middle" fill="#888" font-size="10">Scans</text>
+
+                    <rect x="50" y="120" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
+                    <text x="110" y="145" text-anchor="middle" fill="#888" font-size="11">Nessus</text>
+                    <text x="110" y="162" text-anchor="middle" fill="#888" font-size="10">Scans</text>
+
+                    <rect x="50" y="190" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
+                    <text x="110" y="215" text-anchor="middle" fill="#888" font-size="11">Rapid7</text>
+                    <text x="110" y="232" text-anchor="middle" fill="#888" font-size="10">Scans</text>
+
+                    <rect x="50" y="260" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
+                    <text x="110" y="285" text-anchor="middle" fill="#888" font-size="11">Tenable</text>
+                    <text x="110" y="302" text-anchor="middle" fill="#888" font-size="10">Scans</text>
+
                     <!-- Centralized Vulnerability Database -->
-                    <rect x="50" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
-                    <text x="140" y="185" text-anchor="middle" fill="#00ff41" font-size="16" font-weight="bold">Vuln Database</text>
-                    <text x="140" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">(Centralized)</text>
-                    <text x="140" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">Qualys + Nessus</text>
-                    <text x="140" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">+ Rapid7 + Tenable</text>
+                    <rect x="230" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00ff41" stroke-width="2" rx="8"/>
+                    <text x="320" y="185" text-anchor="middle" fill="#00ff41" font-size="16" font-weight="bold">Vuln Database</text>
+                    <text x="320" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">(Centralized)</text>
+                    <text x="320" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">Aggregated</text>
+                    <text x="320" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">Scan Results</text>
+
+                    <!-- Arrows from Tools to DB -->
+                    <line x1="170" y1="80" x2="230" y2="190" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="170" y1="150" x2="230" y2="200" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="170" y1="220" x2="230" y2="210" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="170" y1="290" x2="230" y2="220" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+                    
+                    <text x="200" y="140" text-anchor="middle" fill="#888" font-size="10" font-style="italic">(managed by</text>
+                    <text x="200" y="155" text-anchor="middle" fill="#888" font-size="10" font-style="italic">security team)</text>
 
                     <!-- API Consumption Layer -->
-                    <rect x="300" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
-                    <text x="390" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">API Consumer</text>
-                    <text x="390" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">Python Scripts</text>
-                    <text x="390" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Query DB API</text>
-                    <text x="390" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• Parse & Normalize</text>
+                    <rect x="480" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
+                    <text x="570" y="185" text-anchor="middle" fill="#00d9ff" font-size="16" font-weight="bold">API Consumer</text>
+                    <text x="570" y="210" text-anchor="middle" fill="#b0b0b0" font-size="12">Python Scripts</text>
+                    <text x="570" y="230" text-anchor="middle" fill="#b0b0b0" font-size="11">• Query DB API</text>
+                    <text x="570" y="248" text-anchor="middle" fill="#b0b0b0" font-size="11">• Parse & Normalize</text>
 
                     <!-- Arrow from DB to API Consumer -->
-                    <line x1="230" y1="210" x2="300" y2="210" stroke="#00ff41" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <line x1="410" y1="210" x2="480" y2="210" stroke="#00ff41" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <text x="445" y="200" text-anchor="middle" fill="#00ff41" font-size="11" font-weight="bold">YOUR WORK</text>
+                    <text x="445" y="235" text-anchor="middle" fill="#00ff41" font-size="11" font-weight="bold">STARTS HERE</text>
 
                     <!-- Enrichment Layer -->
                     <rect x="550" y="150" width="180" height="120" fill="#1a1f3a" stroke="#00d9ff" stroke-width="2" rx="8"/>
