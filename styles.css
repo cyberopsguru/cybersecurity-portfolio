@@ -189,6 +189,7 @@ body {
     letter-spacing: 2px;
     animation: glitch 5s infinite;
     text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+    white-space: nowrap;
 }
 
 @keyframes glitch {
