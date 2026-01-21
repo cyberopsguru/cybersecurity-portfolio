@@ -224,16 +224,23 @@
                 </ul>
             </div>
 
-            <!-- System Design Details -->
+            <!-- System Components -->
             <div class="design-section">
                 <h3><i class="fas fa-cogs"></i> System Components</h3>
                 <p style="color: var(--text-secondary); line-height: 1.8;">
-                    <strong style="color: var(--primary-color);">1. Scanner API Integration:</strong> Python scripts poll Qualys, Nessus, Rapid7, and Tenable APIs every 6 hours. Parse JSON/XML responses, normalize data formats, and store in intermediate database.<br><br>
-                    <strong style="color: var(--primary-color);">2. Enrichment & Attribution:</strong> Match vulnerabilities to assets using CMDB data. Leverage internal LLM to cluster similar findings, identify false positives, and generate standardized descriptions. Resolve misattribution using hostname/IP/instance ID mapping.<br><br>
-                    <strong style="color: var(--primary-color);">3. Automated Ticketing:</strong> Create ServiceNow/Jira tickets with proper owner assignment based on service ownership mapping. Include severity, CVSS score, affected assets, remediation guidance, and SLA deadline.<br><br>
-                    <strong style="color: var(--primary-color);">4. SLA Governance:</strong> Track remediation progress against SLA deadlines. Automated escalation at 7-day warning, 3-day critical, and executive notification for SLA breaches.<br><br>
-                    <strong style="color: var(--primary-color);">5. Verification & Closure:</strong> Trigger rescans after remediation. Validate fix effectiveness. Auto-close tickets upon successful verification.<br><br>
-                    <strong style="color: var(--primary-color);">6. Executive Reporting:</strong> Tableau dashboards showing vulnerability trends, SLA compliance, remediation velocity, and risk posture across all environments.
+                    <strong style="color: var(--primary-color);">Upstream (Managed by Security Team):</strong> Scanning tools (Qualys, Nessus, Rapid7, Tenable) continuously scan infrastructure and write results to centralized vulnerability database.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">1. Database API Consumer (YOUR WORK):</strong> Python scripts query centralized vulnerability database API every 6 hours. Parse JSON responses, normalize data formats across different scanner outputs.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">2. Enrichment & Attribution:</strong> Match vulnerabilities to assets using CMDB data. Leverage internal LLM to cluster similar findings, identify false positive patterns, and generate standardized ticket descriptions. Resolve misattribution using hostname/IP/instance ID mapping.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">3. Automated Ticketing:</strong> Create ServiceNow/Jira tickets with proper owner assignment. Include severity, CVSS score, affected assets, remediation guidance, and SLA deadline.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">4. SLA Monitoring:</strong> Track remediation progress against SLA deadlines. Automated escalation at 7-day warning, 3-day critical alert, executive notification for breaches.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">5. Verification & Closure:</strong> Trigger rescans after remediation claim. Validate fix effectiveness. Auto-close upon successful verification.<br><br>
+                    
+                    <strong style="color: var(--primary-color);">6. Tableau Reporting:</strong> Executive dashboards showing vulnerability trends, SLA compliance, remediation velocity, and risk posture.
                 </p>
             </div>
 
@@ -257,87 +264,40 @@
                 </div>
             </div>
 
-            <!-- Data Flow -->
+            <!-- Results & Metrics (How Measured) -->
             <div class="design-section">
-                <h3><i class="fas fa-exchange-alt"></i> Data Flow</h3>
-                <div class="code-block">
-                    <code>
-<strong>Step 1: API Ingestion</strong><br>
-Scanner API → JSON Response → Parse & Normalize → Store Raw Data<br><br>
-
-<strong>Step 2: Enrichment</strong><br>
-Raw Vuln Data + CMDB Data → Asset Matching → Owner Identification<br>
-→ LLM Analysis (clustering, false positive detection) → Enriched Finding<br><br>
-
-<strong>Step 3: Ticket Creation</strong><br>
-Enriched Finding → Template Generation → ServiceNow API Call<br>
-→ Ticket Created with Owner Assignment → SLA Timer Starts<br><br>
-
-<strong>Step 4: SLA Tracking</strong><br>
-Daily Scan of Open Tickets → Calculate Days Remaining<br>
-→ Trigger Escalations (7-day, 3-day, breach) → Notify Stakeholders<br><br>
-
-<strong>Step 5: Verification</strong><br>
-Remediation Claimed → Trigger Rescan → Compare Results<br>
-→ If Fixed: Auto-Close Ticket | If Not Fixed: Reopen with Evidence<br><br>
-
-<strong>Step 6: Reporting</strong><br>
-Aggregate Metrics → Tableau Data Source → Dashboard Refresh<br>
-→ Executive View (trends, SLA compliance, risk posture)
-                    </code>
-                </div>
-            </div>
-
-            <!-- Design Decisions -->
-            <div class="design-section">
-                <h3><i class="fas fa-lightbulb"></i> Key Design Decisions</h3>
+                <h3><i class="fas fa-chart-line"></i> Results & Metrics (How Measured)</h3>
                 <ul style="color: var(--text-secondary); line-height: 2;">
-                    <li><strong style="color: var(--primary-color);">Idempotency:</strong> All API calls and ticket creation are idempotent to handle retries safely</li>
-                    <li><strong style="color: var(--primary-color);">Human-in-the-Loop:</strong> LLM provides recommendations; analysts validate before ticket creation</li>
-                    <li><strong style="color: var(--primary-color);">Graceful Degradation:</strong> If CMDB lookup fails, ticket still created with manual review flag</li>
-                    <li><strong style="color: var(--primary-color);">Audit Trail:</strong> All decisions logged with timestamps, user IDs, and reasoning</li>
-                    <li><strong style="color: var(--primary-color);">Rate Limiting:</strong> Respect API rate limits with exponential backoff</li>
-                    <li><strong style="color: var(--primary-color);">Scalability:</strong> Horizontal scaling via Kubernetes for high-volume processing</li>
+                    <li><strong style="color: var(--primary-color);">False Positive Rate: 40% → 12%</strong> | Measured: (tickets marked "not a vuln" / total tickets created) over 2 quarters</li>
+                    <li><strong style="color: var(--primary-color);">Manual Effort: 40hrs/week → 4hrs/week (90% reduction)</strong> | Measured: analyst time logs before/after automation over 6 months</li>
+                    <li><strong style="color: var(--primary-color);">On-Time Remediation: 65% → 92%</strong> | Measured: (tickets closed within SLA / total tickets) over 2 quarters</li>
+                    <li><strong style="color: var(--primary-color);">Attribution Accuracy: 88%</strong> | Measured: (correctly routed tickets / total tickets) validated through owner feedback</li>
+                    <li><strong style="color: var(--primary-color);">Triage Time: 3hrs/day → 45min/day (75% reduction)</strong> | Measured: average time from finding ingestion to ticket creation</li>
                 </ul>
             </div>
 
-            <!-- Metrics -->
+            <!-- Artifacts -->
             <div class="design-section">
-                <h3><i class="fas fa-chart-line"></i> System Performance Metrics</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                    <div style="background: var(--bg-darker); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Throughput</h4>
-                        <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">5,000+</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Findings processed/month</p>
+                <h3><i class="fas fa-folder-open"></i> Artifacts & Documentation</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="background: var(--bg-darker); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fab fa-github"></i> Code Repository</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Sanitized automation scripts</p>
+                        <a href="https://github.com/cyberopsguru" style="color: var(--primary-color); font-size: 0.85rem;">View on GitHub →</a>
                     </div>
-                    <div style="background: var(--bg-darker); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Accuracy</h4>
-                        <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">88%</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Correct attribution rate</p>
+                    <div style="background: var(--bg-darker); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-file-code"></i> Sample Schemas</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">API response formats, ticket templates</p>
                     </div>
-                    <div style="background: var(--bg-darker); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Automation</h4>
-                        <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">90%</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Tickets auto-created</p>
+                    <div style="background: var(--bg-darker); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-ticket-alt"></i> Ticket Template</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Standardized remediation ticket format</p>
                     </div>
-                    <div style="background: var(--bg-darker); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">SLA Compliance</h4>
-                        <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">92%</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">On-time remediation</p>
+                    <div style="background: var(--bg-darker); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-chart-bar"></i> Dashboard Screenshot</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Tableau executive metrics view</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Future Enhancements -->
-            <div class="design-section">
-                <h3><i class="fas fa-rocket"></i> Future Enhancements</h3>
-                <ul style="color: var(--text-secondary); line-height: 2;">
-                    <li>Predictive SLA breach detection using ML</li>
-                    <li>Automated remediation for low-risk findings</li>
-                    <li>Integration with CI/CD for shift-left security</li>
-                    <li>Real-time Slack/Teams notifications for critical findings</li>
-                    <li>Automated patch deployment for approved vulnerabilities</li>
-                </ul>
             </div>
         </div>
     </div>
