@@ -79,12 +79,25 @@
                 <i class="fas fa-arrow-left"></i> Back to Portfolio
             </a>
 
-            <h1 style="color: var(--primary-color); margin-bottom: 1rem;">VulnOps Systems Architecture</h1>
-            <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 3rem;">End-to-end vulnerability remediation pipeline design</p>
+            <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Vulnerability Remediation System Design (Case Study)</h1>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 3rem;">Production system design for enterprise-scale vulnerability operations</p>
+
+            <!-- Scope & Constraints -->
+            <div class="design-section">
+                <h3><i class="fas fa-bullseye"></i> Scope & Constraints</h3>
+                <ul style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong style="color: var(--primary-color);">Asset Scale:</strong> 10,000+ assets across on-prem, AWS/Azure/GCP, containers, Kubernetes</li>
+                    <li><strong style="color: var(--primary-color);">Scan Cadence:</strong> Continuous scanning, API polling every 6 hours</li>
+                    <li><strong style="color: var(--primary-color);">Daily Finding Volume:</strong> 5,000+ findings/month (~170/day), 40% initial false positive rate</li>
+                    <li><strong style="color: var(--primary-color);">Environments:</strong> Multi-cloud (AWS/Azure/GCP), Kubernetes clusters, bare metal, endpoints</li>
+                    <li><strong style="color: var(--primary-color);">Tool Boundaries:</strong> Consume data from centralized DB (don't manage scanners), integrate with existing ticketing/CMDB</li>
+                </ul>
+            </div>
 
             <!-- Architecture Diagram -->
             <div class="architecture-diagram">
-                <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 2rem;">System Architecture</h2>
+                <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 1rem;">System Architecture</h2>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; font-style: italic;">Pipeline: ingest → normalize → enrich → prioritize → ticket → verify → report</p>
                 <svg class="diagram-svg" viewBox="0 0 1400 600" xmlns="http://www.w3.org/2000/svg">
                     <!-- Scanning Tools (Upstream) -->
                     <rect x="50" y="50" width="120" height="60" fill="#0a0e27" stroke="#666" stroke-width="1" rx="6"/>
@@ -183,6 +196,32 @@
                     <!-- Labels -->
                     <text x="600" y="30" text-anchor="middle" fill="#00ff41" font-size="18" font-weight="bold">Vulnerability Remediation Pipeline</text>
                 </svg>
+            </div>
+
+            <!-- Key Design Decisions -->
+            <div class="design-section">
+                <h3><i class="fas fa-brain"></i> Key Design Decisions</h3>
+                <ul style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong style="color: var(--primary-color);">Dedupe/Correlation:</strong> Hash-based deduplication on (CVE + hostname + port). LLM clustering for similar findings across different scanners to reduce ticket noise.</li>
+                    <li><strong style="color: var(--primary-color);">Risk Scoring:</strong> CVSS base score + KEV/EPSS data + asset exposure (internet-facing) + asset criticality (PCI/production) → final priority score</li>
+                    <li><strong style="color: var(--primary-color);">Idempotency:</strong> Ticket creation uses unique key (CVE + asset ID + detection date) to prevent duplicates on retry/reprocessing</li>
+                    <li><strong style="color: var(--primary-color);">Failure Handling:</strong> ServiceNow/Jira API failures → queue for retry with exponential backoff. Scanner API rate limits → respect 429 responses, batch requests</li>
+                    <li><strong style="color: var(--primary-color);">Verification Definition:</strong> "Fixed" = rescan shows vulnerability absent + ticket includes remediation evidence (patch version, config change, etc.)</li>
+                    <li><strong style="color: var(--primary-color);">Exception Workflow:</strong> Risk acceptance requests → security review → documented exception with expiration date → exclude from SLA tracking</li>
+                    <li><strong style="color: var(--primary-color);">LLM Guardrails:</strong> Human-in-the-loop validation, audit logging of all LLM decisions, PII redaction, fallback to manual review if confidence < 80%</li>
+                </ul>
+            </div>
+
+            <!-- Reliability & Scale -->
+            <div class="design-section">
+                <h3><i class="fas fa-server"></i> Reliability & Scale</h3>
+                <ul style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong style="color: var(--primary-color);">Queue/Scheduler:</strong> Apache Airflow DAGs for scheduled API polling, task dependencies, and retry logic</li>
+                    <li><strong style="color: var(--primary-color);">Backpressure:</strong> Rate limiting on ticket creation (max 100/min) to avoid overwhelming ServiceNow</li>
+                    <li><strong style="color: var(--primary-color);">Replay Capability:</strong> All raw API responses stored for 90 days, enabling reprocessing if enrichment logic changes</li>
+                    <li><strong style="color: var(--primary-color);">Audit Logs:</strong> Every decision (attribution, priority, ticket creation, closure) logged with timestamp, user ID, and reasoning</li>
+                    <li><strong style="color: var(--primary-color);">Horizontal Scaling:</strong> Kubernetes deployment with 3-10 pods based on queue depth, stateless design for easy scaling</li>
+                </ul>
             </div>
 
             <!-- System Design Details -->
